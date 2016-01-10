@@ -1,0 +1,15 @@
+<div class="row" ng-cloack>
+    <div class="col-md-6" role="main">
+        <form class="form-horizontal" id="patientForm" name="vm.patientForm" ng-submit="vm.submitPatient()">
+            <div ng-include src="'views/patientform.html'"></div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    <button type="submit" class="btn btn-primary" ng-disabled="vm.patientForm.$invalid || vm.patientSaving.saving">
+                        <i class="fa fa-spinner fa-pulse" data-ng-show="vm.patientSaving.saving"></i>
+                        <i class="fa fa-floppy-o" data-ng-show="!vm.patientSaving.saving"></i> Sauver
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+<div class="row" ng-show="vm.backupError || vm.restoreError">
+    <div class="alert alert-danger" role="alert">{{vm.errorMessage}}</div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <button class="btn btn-success btn-block" ng-click="vm.createBackup()" ng-disabled="vm.backupInProgress || vm.restoreInProgress">
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-hdd-o fa-stack-2x" ng-show="!vm.backupInProgress"></i>
+                <i class="fa fa-hdd-o fa-stack-1x" ng-show="vm.backupInProgress"></i>
+                <i class="fa fa-spinner fa-pulse fa-stack-2x" ng-show="vm.backupInProgress"></i>
+            </span> Faire une sauvegarde
+        </button>
+    </div>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="btn btn-success btn-block btn-file" ng-disabled="vm.backupInProgress || vm.restoreInProgress">
+                <span class="fa-stack fa-lg">
+                    <i class="fa fa-upload fa-stack-2x" ng-show="!vm.restoreInProgress || vm.currentRestore !== ''"></i>
+                    <i class="fa fa-upload fa-stack-1x" ng-show="vm.restoreInProgress && vm.currentRestore === ''"></i>
+                    <i class="fa fa-spinner fa-pulse fa-stack-2x" ng-show="vm.restoreInProgress && vm.currentRestore === ''"></i>
+                </span> Charger et restorer une sauvegarde
+                <input type="file" class="upload" name="backup" onchange="angular.element(this).scope().vm.upload(this.files[0])" />
+            </div>
+            <progressbar value="vm.uploadProgress" type="warning" ng-show="vm.uploadInProgress"></progressbar>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div data-wploadingtable loading="vm.loadingData" total-items="vm.totalNbBackup" items-per-page="vm.backupPerPage"
+         on-page-change="vm.pageChanged" current-page="vm.page">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Sauvegarde</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="backup in vm.backups" ng-hide="!vm.backups.length" ng-cloak>
+                <td>{{backup}}</td>
+                <td>
+                    <button class="btn btn-primary" uib-tooltip="Restorer cette sauvegarde" ng-click="vm.restore(backup)" ng-disabled="vm.restoreInProgress || vm.backupInProgress">
+                        <i class="fa fa-repeat fa-flip-horizontal" ng-hide="vm.currentRestore === backup"></i>
+                        <i class="fa fa-repeat fa-flip-horizontal fa-restore" ng-show="vm.currentRestore === backup"></i>
+                    </button>
+                    <button class="btn btn-primary" uib-tooltip="Envoyer sur google Drive" ng-disabled="true">
+                        <i class="fa fa-cloud-upload"></i>
+                    </button>
+                </td>
+            </tr>
+            <tr ng-show="!vm.backups.length" class="warning">
+                <td colspan="4" class="text-center">
+                    Aucune sauvegarde !
+                    <button class="btn btn-success" ng-disabled="vm.backupInProgress" ng-click="vm.createBackup()">
+                        <i class="fa fa-hdd-o" ng-show="!vm.backupInProgress"></i>
+                        <i class="fa fa-spinner fa-pulse" ng-show="vm.backupInProgress"></i> Faire une sauvegarde
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

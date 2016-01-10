@@ -1,0 +1,91 @@
+@(title: String)
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>@title</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" media="screen" href="assets/stylesheets/main.css" />
+        <link rel="stylesheet" media="screen" href="@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.css"))" />
+        <link rel="stylesheet" media="screen" href="@routes.WebJarAssets.at(WebJarAssets.locate("font-awesome.min.css"))" />
+        <link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("datetimepicker.css"))"/>
+        <link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("fullcalendar.min.css"))" />
+        <link rel="shortcut icon" type="image/png" href="assets/images/favicon.png" />
+        <script src="@routes.WebJarAssets.at(WebJarAssets.locate("moment-with-locales.min.js"))"></script>
+        <script src="@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))"></script>
+        <script src="@routes.WebJarAssets.at(WebJarAssets.locate("jquery-ui.min.js"))"></script>
+        <script src="@routes.WebJarAssets.at(WebJarAssets.locate("angular.min.js"))"></script>
+        <script src="@routes.WebJarAssets.at(WebJarAssets.locate("angular-route.min.js"))"></script>
+        <script src="@routes.WebJarAssets.at(WebJarAssets.locate("ui-bootstrap-tpls.min.js"))"></script>
+        <script src="@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.js"))"></script>
+        <script src="@routes.WebJarAssets.at(WebJarAssets.locate("datetimepicker.js"))"></script>
+        <script src="@routes.WebJarAssets.at(WebJarAssets.locate("fullcalendar.min.js"))"></script>
+        <script src="@routes.WebJarAssets.at(WebJarAssets.locate("0.8.1/calendar.js"))"></script>
+        <script src='@routes.WebJarAssets.at(WebJarAssets.locate("lang/fr.js"))'></script>
+        <script src="assets/javascripts/app.js"></script>
+        <script src="assets/javascripts/directives/loadingtable.js"></script>
+        <script src="assets/javascripts/directives/sketch.js"></script>
+        <script src="assets/javascripts/services/patient.js"></script>
+        <script src="assets/javascripts/services/consultation.js"></script>
+        <script src="assets/javascripts/services/billing.js"></script>
+        <script src="assets/javascripts/services/calendar.js"></script>
+        <script src="assets/javascripts/services/backup.js"></script>
+        <script src="assets/javascripts/controllers/global.js"></script>
+        <script src="assets/javascripts/controllers/addpatient.js"></script>
+        <script src="assets/javascripts/controllers/showpatient.js"></script>
+        <script src="assets/javascripts/controllers/listpatient.js"></script>
+        <script src="assets/javascripts/controllers/listbills.js"></script>
+        <script src="assets/javascripts/controllers/consult/addconsult.js"></script>
+        <script src="assets/javascripts/controllers/consult/showconsult.js"></script>
+        <script src="assets/javascripts/controllers/settings.js"></script>
+        <script src="assets/javascripts/controllers/calendar.js"></script>
+        <script src="assets/javascripts/controllers/backup.js"></script>
+    </head>
+    <body ng-app="webPatient" ng-controller="GlobalCtrl">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Web Patient</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#/settings">Configuration</a></li>
+                </ul>
+                <form class="navbar-form navbar-right">
+                    <input type="text" class="form-control" typeahead-on-select="searchSelect($item, $model, $label)" placeholder="Rechercher..." ng-model="quickPatient" typeahead-loading="loadingPatients" typeahead="patientSearch as patientSearch.firstName + ' ' + patientSearch.name for patientSearch in search($viewValue)">
+                    <i ng-show="loadingPatients" class="glyphicon glyphicon-refresh"></i>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li>
+                    <a href="#/patient/add"><i class="fa fa-plus-circle"></i> Nouveau Patient</a>
+                </li>
+                <li>
+                    <a href="#/patients"><i class="fa fa-list"></i> Patients</a>
+                </li>
+                <li>
+                    <a href="#/calendar"><i class="fa fa-calendar"></i> Agenda</a>
+                </li>
+                <li>
+                    <a href="#/bills"><i class="fa fa-eur"></i> Factures</a>
+                </li>
+                <li>
+                    <a href="#/backup"><i class="fa fa-floppy-o"></i> Sauvegardes</a>
+                </li>
+            </ul>
+        </div>
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12" ng-view=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>

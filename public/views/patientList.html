@@ -1,0 +1,35 @@
+<div class="row">
+    <a class="btn btn-success" href="#/patient/add" role="button"><i class="fa fa-plus-circle"></i> Nouveau Patient</a>
+</div>
+<div class="row">
+    <div data-wploadingtable loading="vm.loadingData" total-items="vm.totalNbPatients" items-per-page="vm.patientPerPage"
+         on-page-change="vm.pageChanged" current-page="vm.currentPage">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Patient</th>
+                    <th>T&eacute;l&eacute;phone</th>
+                    <th>Adresse</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="patient in vm.patients" ng-hide="!vm.patients.length">
+                    <td>
+                        <a href="#/patient?id={{patient.id}}">{{patient.firstName}} {{patient.name}}</a>
+                        <i class="fa fa-mars" ng-show="patient.sex === 'MALE'"></i>
+                        <i class="fa fa-venus" ng-show="patient.sex === 'FEMALE'"></i>
+                    </td>
+                    <td>
+                        {{patient.phone}}
+                    </td>
+                    <td>
+                        {{patient.address}}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" ng-show="!vm.patients.length" class="warning">Aucun patient</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

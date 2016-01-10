@@ -1,0 +1,56 @@
+<div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+        <label class="radio-inline">
+            <input type="radio" name="sex" id="sexFemale" value="FEMALE" ng-model="vm.patient.sex" required="" /><i class="fa fa-venus"></i>Femme
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="sex" id="sexMale" value="MALE" ng-model="vm.patient.sex" required="" /><i class="fa fa-mars"></i>Homme
+        </label>
+    </div>
+</div>
+<div class="form-group">
+    <label for="firstName" class="col-sm-3 control-label">Prénom</label>
+    <div class="col-sm-9">
+        <input type="text" class="form-control" id="firstName" placeholder="Prénom" ng-model="vm.patient.firstName" required="" />
+    </div>
+</div>
+<div class="form-group">
+    <label for="name" class="col-sm-3 control-label">Nom</label>
+    <div class="col-sm-9">
+        <input type="text" class="form-control" id="name" placeholder="Nom" ng-model="vm.patient.name" required="" />
+    </div>
+</div>
+<div class="form-group">
+    <label for="birthday" class="col-sm-3 control-label">Date de naissance</label>
+    <div class="col-sm-9">
+        <div class="dropdown">
+            <a class="dropdown-toggle my-toggle-select" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="">
+                <div class="input-append">
+                    <input type="text" class="form-control" id="birthday" placeholder="dd/mm/yyyy" value="{{vm.patient.birthday | date:'dd/MM/yyyy'}}">
+                </div>
+            </a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <datetimepicker data-ng-model="vm.patient.birthday"
+                                data-datetimepicker-config="{startView: 'year',minView:'day', dropdownSelector: '.my-toggle-select'}"></datetimepicker>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="form-group">
+    <label for="phone" class="col-sm-3 control-label">Tel <i class="fa fa-phone"></i></label>
+    <div class="col-sm-9">
+        <input type="text" class="form-control" id="phone" placeholder="012345678" ng-pattern="/^(\+33|0)[1-9][0-9]{8}$/i" required="" ng-model="vm.patient.phone" />
+    </div>
+</div>
+<div class="form-group">
+    <label for="address" class="col-sm-3 control-label">Adresse <i class="fa fa-home"></i></label>
+    <div class="col-sm-9">
+        <input type="text" class="form-control" id="address" placeholder="01 av des Champs-Élysées" ng-model="vm.patient.address" />
+    </div>
+</div>
+<div class="form-group">
+    <label for="email" class="col-sm-3 control-label">Email <i class="fa fa-email"></i></label>
+    <div class="col-sm-9">
+        <input type="email" class="form-control" id="email" placeholder="nomprenom@mail.com" ng-model="vm.patient.email" />
+    </div>
+</div>

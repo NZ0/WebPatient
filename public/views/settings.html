@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="h2">Configuration</h1>
+        <form class="form-horizontal" name="settingsForm" ng-submit="vm.saveSettings()">
+            <h2 class="h3">Praticien(ne)</h2>
+            <div class="form-group">
+                <label for="firstName" class="col-sm-3 control-label">Prénom</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="firstName" placeholder="Prénom" ng-model="vm.settings.firstName" required="" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-sm-3 control-label">Nom</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="name" placeholder="Nom" ng-model="vm.settings.name" required="" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="address" class="col-sm-3 control-label">Adresse <i class="fa fa-home"></i></label>
+                <div class="col-sm-4">
+                    <textarea class="form-control" id="address" rows="3" placeholder="Adresse" ng-model="vm.settings.address" required=""></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="town" class="col-sm-3 control-label">Code Postal</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="zipCode" placeholder="84110" ng-model="vm.settings.zipCode" required="" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="town" class="col-sm-3 control-label">Ville</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="town" placeholder="Ville" ng-model="vm.settings.town" required="" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phone" class="col-sm-3 control-label">Tel <i class="fa fa-phone"></i></label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="phone" placeholder="012345678" ng-pattern="/^(\+33|0)[1-9][0-9]{8}$/i" required="" ng-model="vm.settings.phone" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email" class="col-sm-3 control-label">Email <i class="fa fa-email"></i></label>
+                <div class="col-sm-4">
+                    <input type="email" class="form-control" id="email" placeholder="nomprenom@mail.com" ng-model="vm.settings.email" />
+                </div>
+            </div>
+            <h2 class="h3">Facturation</h2>
+            <div class="form-group">
+                <label for="price" class="col-sm-3 control-label">Prix par défault</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control" id="price" placeholder="ex: 50 ou 51.2 ou 51.23" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/i" required="" ng-model="vm.settings.price" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="billheader" class="col-sm-3 control-label">En-tête</label>
+                <div class="col-sm-4">
+                    <textarea class="form-control" id="billheader" rows="3" placeholder="En-tête" ng-model="vm.settings.billHeader" required=""></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="billfooter" class="col-sm-3 control-label">Pied de page</label>
+                <div class="col-sm-4">
+                    <textarea class="form-control" id="billfooter" rows="3" placeholder="Pied de page" ng-model="vm.settings.billFooter" required=""></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-4">
+                    <button type="submit" class="btn btn-primary" ng-disabled="settingsForm.$invalid || vm.saving">
+                        <i class="fa fa-spinner fa-pulse" data-ng-show="vm.saving"></i>
+                        <i class="fa fa-floppy-o" data-ng-show="!vm.saving"></i> Sauver
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

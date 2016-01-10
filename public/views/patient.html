@@ -1,0 +1,107 @@
+<div class="row">
+    <div class="loading-container">
+        <div class="loading-mask" data-ng-show="!vm.patientLoading.loaded"></div>
+        <div class="col-md-6" role="main" data-ng-show="vm.patientLoading.loaded && !vm.patientLoading.error" ng-cloak>
+            <h1 class="h2">{{vm.patient.firstName}} {{vm.patient.name}}</h1>
+            <form class="form-horizontal" id="patientForm" name="vm.patientForm" ng-submit="vm.editPatient()">
+                <div ng-include src="'views/patientform.html'"></div>
+                <div id="complementaryInfo">
+                    <div class="form-group">
+                        <label for="mutuel" class="col-sm-3 control-label">Mutuelle</label>
+                        <div class="col-sm-9">
+                            <input type="checkbox" id="mutuel" name="mutuel" ng-model="vm.patient.information.mutuel"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="maritalStatus" class="col-sm-3 control-label">Statut marital</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="maritalStatus" name="maritalStatus" ng-model="vm.patient.information.maritalStatus">
+                                <option value="SINGLE">Célibataire</option>
+                                <option value="MARRIED">Marié(e)</option>
+                                <option value="IN_COUPLE">En couple</option>
+                                <option value="DIVORCED">Divorcé(e)</option>
+                                <option value="WIDOW">Veuf(ve)</option>
+                                <option value="PACS">Pacsé(e)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="children" class="col-sm-3 control-label">Nombre d'enfants</label>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" id="children" name="children" min="0" ng-model="vm.patient.information.children"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="profession" class="col-sm-3 control-label">Profession</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="profession" name="profession" ng-model="vm.patient.information.profession" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="hobbits" class="col-sm-3 control-label">Sports / Loisirs</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="hobbits" name="hobbits" ng-model="vm.patient.information.hobbits" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="doctor" class="col-sm-3 control-label">Médecin Traitant</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="doctor" name="doctor" ng-model="vm.patient.information.doctor" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-9">
+                            <label class="radio-inline">
+                                <input type="radio" name="hand" id="righty" value="RIGHT" ng-model="vm.patient.information.hand" />Droitier
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="hand" id="lefty" value="LEFT" ng-model="vm.patient.information.hand" />Gaucher
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <textarea class="form-control" rows="3" placeholder="Remarques" ng-model="vm.patient.information.misc"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <button type="submit" class="btn btn-primary" ng-disabled="vm.patientForm.$invalid || vm.editSaving.saving">
+                            <i class="fa fa-floppy-o" data-ng-show="!vm.editSaving.saving"></i>
+                            <i class="fa fa-spinner fa-pulse" data-ng-show="vm.editSaving.saving"></i> Sauver
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6 col-sm-3" role="complementary" data-ng-show="vm.patientLoading.loaded && !vm.patientLoading.error" ng-cloak>
+            <h1 class="h3">Consultations <a class="btn btn-success" href="#/consultation/add?patient={{vm.patient.id}}" role="button"><i class="fa fa-plus-circle"></i> Nouvelle consultation</a></h1>
+            <div data-wploadingtable class="table-responsive" loading="!vm.consultLoading.loaded" total-items="vm.totalConsult" items-per-page="vm.nbConsultPage"
+                 on-page-change="vm.pageChanged" current-page="vm.currentPage">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <td>Titre</td>
+                            <td>Date</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="consultation in vm.consultations" ng-hide="!vm.consultations.length || vm.consultLoading.error">
+                            <td><a href="#/consultation?id={{consultation.id}}">{{consultation.title}}</a></td>
+                            <td>{{consultation.date | date : 'dd/MM/yyyy'}}</td>
+                            <td><i class="fa fa-exclamation-triangle" ng-if="consultation.important"></i></td>
+                        </tr>
+                        <tr ng-show="!vm.consultations.length || vm.consultLoading.error">
+                            <td colspan="3" class="warning text-center">Aucune consultation</td>
+                        </tr>
+                    </tbody>
+                </table>
+             </div>
+        </div>
+        <div class="col-md-12 alert alert-danger text-large" role="alert" data-ng-show="vm.patientLoading.loaded && vm.patientLoading.error" ng-cloak>
+            <big><i class="fa fa-exclamation-triangle"></i> Impossible de trouver le patient!</big>
+        </div>
+    </div>
+</div>

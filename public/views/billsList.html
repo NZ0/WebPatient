@@ -1,0 +1,33 @@
+<form class="form-inline">
+    <div class="form-group">
+        <label class="sr-only" for="search">Num&eacute;ro de facture</label>
+        <div class="input-group">
+            <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+            <input type="text" class="form-control" id="search" data-ng-model="vm.searchedId" data-ng-change="vm.autoSearch()" />
+        </div>
+    </div>
+</form>
+<div data-wploadingtable loading="vm.loadingData" total-items="vm.totalNbBills" items-per-page="vm.billsPerPage"
+     on-page-change="vm.pageChanged" current-page="vm.page">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Num&eacute;ro</th>
+                <th>Date</th>
+                <th>Patient</th>
+                <th>Prix</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="bill in vm.bills" ng-hide="!vm.bills.length" ng-cloak>
+                <td><a href="/billing/{{bill.id}}">{{bill.id}}</a></td>
+                <td>{{bill.date | date : 'dd/MM/yyyy'}}</td>
+                <td><a href="#/patient?id={{bill.patientId}}">{{bill.patientFirstName}} {{bill.patientName}}</a></td>
+                <td>{{bill.price}}</td>
+            </tr>
+            <tr ng-show="!vm.bills.length" class="warning">
+                <td colspan="4" class="text-center">Aucune facture</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,3 +1,18 @@
+logs
+target
+calendar
+backup
+/.idea
+/.idea_modules
+/.classpath
+/.project
+/.settings
+/RUNNING_PID
+README
+LICENSE
+activator
+activator.bat
+activator-launch-1.3.5.jar
 # Windows image file caches
 Thumbs.db
 ehthumbs.db

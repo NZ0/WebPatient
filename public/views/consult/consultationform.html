@@ -1,0 +1,99 @@
+<script src="assets/javascripts/sketch.mini.js"></script>
+<div class="form-horizontal">
+    <div class="form-group">
+        <label for="title" class="col-sm-2 control-label">Titre de la consultation</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="title" name="title" ng-model="vm.consultation.title" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="date" class="col-sm-2 control-label">Date de la consultation</label>
+        <div class="col-sm-2">
+            <div class="dropdown">
+                <a class="dropdown-toggle my-toggle-select" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="">
+                    <div class="input-append">
+                        <input type="text" class="form-control" id="date" placeholder="dd/mm/yyyy" value="{{vm.consultation.date | date:'dd/MM/yyyy'}}">
+                    </div>
+                </a>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                    <datetimepicker data-ng-model="vm.consultation.date" data-datetimepicker-config="{startView: 'year',minView:'day', dropdownSelector: '.my-toggle-select'}"></datetimepicker>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="important" class="col-sm-2 control-label">Marquer comme importante</label>
+        <div class="col-sm-1">
+            <input type="checkbox" class="form-control" id="important" name="important" ng-model="vm.consultation.important" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="size" class="col-sm-2 control-label">Taille (cm)</label>
+        <div class="col-sm-1">
+            <input type="number" min="0" class="form-control" id="size" name="size" ng-model="vm.consultation.size" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="weight" class="col-sm-2 control-label">Poids (kg)</label>
+        <div class="col-sm-1">
+            <input type="number" min="0" class="form-control" id="weight" name="weight" ng-model="vm.consultation.weight" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="imc" class="col-sm-2 control-label">IMC</label>
+        <div class="col-sm-1">
+            <input type="number" min="0" class="form-control" id="imc" name="imc" ng-model="vm.consultation.imc" disabled="disabled" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Profile du patient</label>
+        <div class="col-sm-offset-2 col-sm-10">
+            <label class="radio-inline">
+                <input type="radio" name="profile" id="adulte" value="ADULT" ng-model="vm.consultation.profile" /> Adulte
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="profile" id="pregnant" value="PREGNANT" ng-model="vm.consultation.profile" /> Femme enceinte
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="profile" id="child" value="CHILD" ng-model="vm.consultation.profile" /> Enfant
+            </label>
+            <label class="radio-inline">
+                <input type="radio" name="profile" id="baby" value="BABY" ng-model="vm.consultation.profile" /> Nourisson
+            </label>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <h4>Motif Principal</h4>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <textarea class="form-control" rows="10" placeholder="Motif" ng-model="vm.consultation.mainReason"></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <h4>Tests ostéopathiques / différentiels</h4>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <textarea class="form-control" rows="10" placeholder="Tests" ng-model="vm.consultation.tests"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <h4>Traitement</h4>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <textarea class="form-control" rows="10" placeholder="Traitement" ng-model="vm.consultation.treatment"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-8" id="schemaPanel">
+        <h4>Schémas</h4>
+        <wpsketch display-toolbar="true" img-url="vm.consultation.sketch" />
+    </div>
+</div>

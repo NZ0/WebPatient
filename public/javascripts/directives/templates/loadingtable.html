@@ -1,0 +1,7 @@
+<div class="loading-container">
+    <div class="loading-mask" ng-show="vm.loading"></div>
+    <ng-transclude></ng-transclude>
+    <nav class="text-center">
+        <pagination ng-model="vm.currentPage" ng-change="vm.update()" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" boundary-links="true"></pagination>
+    </nav>
+</div>

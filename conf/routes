@@ -1,0 +1,50 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index()
+
+GET     /patient/search             controllers.PatientController.search(name : String)
+PUT     /patient                    controllers.PatientController.create()
+GET     /patient/list/:page         controllers.PatientController.list(page: Integer)
+GET     /patient/:id                controllers.PatientController.show(id: Long)
+GET     /patient/nb                 controllers.PatientController.nbPatients()
+POST    /patient/:id                controllers.PatientController.edit(id : Long)
+
+GET     /consult/list/:id/:page     controllers.ConsultationController.list(id: Long, page: Integer)
+GET     /consult/:id                controllers.ConsultationController.show(id: Long)
+POST    /consult/:id                controllers.ConsultationController.edit(id : Long)
+PUT     /consult                    controllers.ConsultationController.create()
+GET     /consult/last/:patientId    controllers.ConsultationController.last(patientId: Long)
+
+GET     /settings/list              controllers.SettingsController.list()
+GET     /settings/:name             controllers.SettingsController.get(name : models.config.ParameterName)
+POST    /settings                   controllers.SettingsController.update()
+
+PUT     /billing                    controllers.BillController.create()
+GET     /billing/:hash              controllers.BillController.get(hash : String)
+GET     /billing/list/:page         controllers.BillController.list(page : Integer)
+GET     /billing/nb                 controllers.BillController.nbBills()
+GET     /billing/search/:page       controllers.BillController.search(id : String, page : Integer)
+
+GET     /calendar/login             controllers.CalendarController.auth()
+GET     /calendar/login/success     controllers.CalendarController.authResult()
+GET     /calendar/list              controllers.CalendarController.list(start : String ?= null, end : String ?= null)
+PUT     /calendar                   controllers.CalendarController.createEvent()
+POST    /calendar                   controllers.CalendarController.updateEvent()
+GET     /calendar/registered        controllers.CalendarController.isRegistered()
+DELETE  /calendar/:id               controllers.CalendarController.deleteEvent(id : String)
+
+GET     /backup/list                controllers.backup.BackupRestoreController.listBackup()
+PUT     /backup                     controllers.backup.BackupRestoreController.backup()
+GET     /backup/:token              controllers.backup.BackupRestoreController.backupStatus(token : String)
+POST    /restore/:backup            controllers.backup.BackupRestoreController.restore(backup : String)
+POST    /restore                    controllers.backup.BackupRestoreController.uploadAndRestore()
+GET     /restore/:token             controllers.backup.BackupRestoreController.restoreStatus(token: String)
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+GET     /webjars/*file              controllers.WebJarAssets.at(file)
+GET     /views/*file                controllers.Assets.at(path="/public/views", file)
+GET     /directives/templates/*file controllers.Assets.at(path="/public/javascripts/directives/templates", file)

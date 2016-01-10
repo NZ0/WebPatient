@@ -1,0 +1,71 @@
+@(bill : controllers.dto.BillDto)
+
+@dateFormat(date: java.util.Date) = {
+    @(new java.text.SimpleDateFormat("dd/MM/yyyy").format(date))
+}
+
+@htmlEntities(text: String) = {
+    @org.apache.commons.lang3.StringEscapeUtils.escapeHtml4(text)
+}
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Facture n&deg;: @bill.getId()</title>
+        <link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.css"))" />
+        <link rel="stylesheet" href="@routes.WebJarAssets.at(WebJarAssets.locate("font-awesome.min.css"))" />
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                @bill.getHeader()
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="">
+                        <address>
+                            <strong>@bill.getPractitionerFirstName() @bill.getPractitionerName()</strong><br />
+                            @bill.getAddress()<br />
+                            @bill.getZipCode() @bill.getTown()<br />
+                            <i class="fa fa-mobile"></i> @bill.getPhone()
+                        </address>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        N&deg;: @bill.getId()<br />
+                        A l'attention de @bill.getPatientFirstName() @bill.getPatientName()<br />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <h1 class="text-center">NOTE D'HONORAIRES</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Quantit&eacute;</th>
+                            <th>Libell&eacute;</th>
+                            <th>Prix Unitaire</th>
+                            <th>Prix Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>@bill.getDetails()</td>
+                            <td>@bill.getPrice() &euro;</td>
+                            <td>@bill.getPrice() &euro;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <p class="text-right">A @bill.getTown(), le @dateFormat(bill.getDate())</p>
+            </div>
+            <div class="row">
+                @bill.getFooter()
+            </div>
+        </div>
+    </body>
+</html>

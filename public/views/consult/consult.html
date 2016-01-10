@@ -1,0 +1,56 @@
+<script src="assets/javascripts/sketch.mini.js"></script>
+<div class="row">
+    <div class="loading-container">
+        <div class="loading-mask" data-ng-show="loading"></div>
+        <div class="col-sm-12" data-ng-hide="loading" ng-cloak>
+            <h1 class="h2">{{::vm.consultation.title}} le {{::vm.consultation.date | date : 'dd/MM/yyyy'}}</h1>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="h3">Information</h2>
+                    <p>
+                        <dl class="dl-horizontal">
+                            <dt>Patient : </dt>
+                            <dd>{{::vm.patient.firstName}} {{::vm.patient.name}}</dd>
+                            <dt>Age : </dt>
+                            <dd>{{::vm.patient.age}} ans</dd>
+                            <dt>Taille : </dt>
+                            <dd>{{::vm.consultation.size}} cm</dd>
+                            <dt>Poids : </dt>
+                            <dd>{{::vm.consultation.weight}} Kg</dd>
+                            <dt>Profile : </dt>
+                            <dd>{{::vm.consultation.profile}}</dd>
+                        </dl>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h2 class="h3">Motif Principal</h2>
+                    <p>
+                        {{::vm.consultation.mainReason}}
+                    </p>
+                </div>
+                <div class="col-sm-6">
+                    <h2 class="h3">Tests ostéopathiques / différentiels</h2>
+                    <p>
+                        {{::vm.consultation.tests}}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2 class="h3">Traitement</h2>
+                    <p>
+                        {{::vm.consultation.treatment}}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <h3 class="h4">Schémas</h3>
+                    <wpsketch read-only="true" display-toolbar="vm.displayToolbar" img-url="vm.consultation.sketch" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
