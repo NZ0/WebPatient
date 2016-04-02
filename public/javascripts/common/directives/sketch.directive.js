@@ -6,7 +6,7 @@
     function sketch() {
         var directive = {
             restrict: 'E',
-            templateUrl: 'directives/templates/sketch.html',
+            templateUrl: 'common/directives/templates/sketch.html',
             scope: {
                 displayToolbar: '=',
                 imgUrl: '=',
@@ -28,18 +28,13 @@
             }
 
             scope.$watch('imgUrl', function() {
-                if (updateFromModel) {
-                    console.log('redraw from model');
-                    var imageObj = new Image();
-                    imageObj.onload = function() {
-                      context.drawImage(this, 0, 0);
-                    };
-                    if (scope.imgUrl) {
-                        imageObj.src = scope.imgUrl;
-                    }
-                } else {
-                    console.log('data updated from view');
-                    updateFromModel = true;
+                console.log('Update from model');
+                var imageObj = new Image();
+                imageObj.onload = function() {
+                  context.drawImage(this, 0, 0);
+                };
+                if (scope.imgUrl) {
+                    imageObj.src = scope.imgUrl;
                 }
             });
 

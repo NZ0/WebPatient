@@ -27,6 +27,7 @@ public class ConsultationDto {
     private String tests;
     private String treatment;
     private String sketch;
+    private String bill;
 
     public ConsultationDto() {}
 
@@ -52,6 +53,9 @@ public class ConsultationDto {
         this.tests = consultation.getTests();
         this.treatment = consultation.getTreatment();
         this.sketch = consultation.getSketch();
+        if (consultation.getBill() != null) {
+            this.bill = consultation.getBill().getHash();
+        }
     }
 
     public void setId(final long id) {
@@ -148,5 +152,13 @@ public class ConsultationDto {
 
     public void setSketch(String sketch) {
         this.sketch = sketch;
+    }
+
+    public String getBill() {
+        return bill;
+    }
+
+    public void setBill(String bill) {
+        this.bill = bill;
     }
 }

@@ -4,8 +4,8 @@ import models.patient.Hand;
 import models.patient.MaritalStatus;
 import models.patient.PatientInformation;
 
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by zero on 31/01/15.
@@ -22,6 +22,15 @@ public class PatientInformationDto {
     private Hand hand;
     private String misc;
 
+    private String other;
+    private String avp;
+    private String gyneco;
+    private String ohn;
+    private String cardio;
+    private String gastrointestinal;
+    private String surgery;
+    private String treatment;
+
     public PatientInformationDto() {
 
     }
@@ -37,7 +46,17 @@ public class PatientInformationDto {
         this.hand = information.getHand();
         this.misc = information.getMisc();
 
-
+        Map<String, String> additional = information.getAdditionalInformation();
+        if (additional != null) {
+            this.avp = additional.get(PatientInformation.AVP);
+            this.gyneco = additional.get(PatientInformation.GYNECO);
+            this.ohn = additional.get(PatientInformation.OHN);
+            this.other = additional.get(PatientInformation.OTHER);
+            this.cardio = additional.get(PatientInformation.CARDIO);
+            this.gastrointestinal = additional.get(PatientInformation.GASTROINTESTINAL);
+            this.surgery = additional.get(PatientInformation.SURGERY);
+            this.treatment = additional.get(PatientInformation.TREATMENT);
+        }
     }
 
     public MaritalStatus getMaritalStatus() {
@@ -110,5 +129,69 @@ public class PatientInformationDto {
 
     public void setMisc(String misc) {
         this.misc = misc;
+    }
+
+    public void setOther(String other) {
+        this.other = other;
+    }
+
+    public void setAvp(String avp) {
+        this.avp = avp;
+    }
+
+    public void setGyneco(String gyneco) {
+        this.gyneco = gyneco;
+    }
+
+    public void setOhn(String ohn) {
+        this.ohn = ohn;
+    }
+
+    public String getAvp() {
+        return avp;
+    }
+
+    public String getGyneco() {
+        return gyneco;
+    }
+
+    public String getOhn() {
+        return ohn;
+    }
+
+    public String getOther() {
+        return other;
+    }
+
+    public String getCardio() {
+        return cardio;
+    }
+
+    public void setCardio(String cardio) {
+        this.cardio = cardio;
+    }
+
+    public String getGastrointestinal() {
+        return gastrointestinal;
+    }
+
+    public void setGastrointestinal(String gastrointestinal) {
+        this.gastrointestinal = gastrointestinal;
+    }
+
+    public String getSurgery() {
+        return surgery;
+    }
+
+    public void setSurgery(String surgery) {
+        this.surgery = surgery;
+    }
+
+    public String getTreatment() {
+        return treatment;
+    }
+
+    public void setTreatment(String treatment) {
+        this.treatment = treatment;
     }
 }

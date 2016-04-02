@@ -20,12 +20,16 @@ public class ConsultationList extends ListDto<ConsultationList.ConsultationDtoLi
         private Date date;
         private String title;
         private boolean important;
+        private String bill;
 
         public ConsultationDtoLite(Consultation consultation) {
             this.id = consultation.getId();
             this.date = consultation.getDate();
             this.title = consultation.getTitle();
             this.important = consultation.isImportant();
+            if (consultation.getBill() != null) {
+                this.bill = consultation.getBill().getHash();
+            }
         }
 
         public long getId() {
@@ -58,6 +62,14 @@ public class ConsultationList extends ListDto<ConsultationList.ConsultationDtoLi
 
         public void setImportant(boolean important) {
             this.important = important;
+        }
+
+        public String getBill() {
+            return bill;
+        }
+
+        public void setBill(String bill) {
+            this.bill = bill;
         }
     }
 }

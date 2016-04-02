@@ -13,47 +13,47 @@ angular
                 templateUrl: 'views/index.html'
             })
             .when('/patient', {
-                templateUrl: 'views/patient.html',
+                templateUrl: 'patient/views/patient.html',
                 controller: 'ShowPatientController',
                 controllerAs: 'vm'
             })
             .when('/patient/add', {
-                templateUrl: 'views/addpatient.html',
+                templateUrl: 'patient/views/add.html',
                 controller: 'AddPatientController',
                 controllerAs: 'vm'
             })
             .when('/patients', {
-                templateUrl: 'views/patientList.html',
+                templateUrl: 'patient/views/list.html',
                 controller: 'ListPatientController',
                 controllerAs: 'vm'
             })
             .when('/consultation/add', {
-                templateUrl: 'views/consult/addconsult.html',
+                templateUrl: 'consult/views/add.html',
                 controller: 'AddConsultationCtrl',
                 controllerAs: 'vm'
             })
             .when('/consultation', {
-                templateUrl:'views/consult/consult.html',
+                templateUrl:'consult/views/add.html',
                 controller: 'ShowConsultationCtrl',
                 controllerAs: 'vm'
             })
             .when('/settings', {
-                templateUrl: 'views/settings.html',
+                templateUrl: 'settings/views/settings.html',
                 controller: 'SettingsCtrl',
                 controllerAs: 'vm'
             })
             .when('/bills', {
-                templateUrl: 'views/billsList.html',
+                templateUrl: 'bill/views/list.html',
                 controller: 'ListBillsController',
                 controllerAs: 'vm'
             })
             .when('/calendar', {
-                templateUrl: 'views/calendar.html',
+                templateUrl: 'calendar/calendar.html',
                 controller: 'CalendarCtrl',
                 controllerAs: 'vm'
             })
             .when('/backup', {
-                templateUrl: 'views/backup.html',
+                templateUrl: 'backup/views//backup.html',
                 controller: 'BackupCtrl',
                 controllerAs: 'vm'
             });

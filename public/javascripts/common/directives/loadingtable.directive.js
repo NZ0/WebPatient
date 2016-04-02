@@ -9,7 +9,7 @@
             require: ['^ui.bootstrap'],
             restrict: 'A',
             transclude: true,
-            templateUrl: 'directives/templates/loadingtable.html',
+            templateUrl: 'common/directives/templates/loadingtable.html',
             scope: {
                 totalItems: '=',
                 firstText: '@',

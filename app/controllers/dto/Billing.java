@@ -1,5 +1,6 @@
 package controllers.dto;
 
+import models.PaymentType;
 import play.data.validation.Constraints;
 
 /**
@@ -12,7 +13,10 @@ public class Billing {
     @Constraints.Required
     private float price;
 
-    private String detail;
+    @Constraints.Required
+    private PaymentType type;
+
+    private String details;
 
     public long getConsultId() {
         return consultId;
@@ -30,11 +34,19 @@ public class Billing {
         this.price = price;
     }
 
-    public String getDetail() {
-        return detail;
+    public String getDetails() {
+        return details;
     }
 
-    public void setDetail(String detail) {
-        this.detail = detail;
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public PaymentType getType() {
+        return type;
+    }
+
+    public void setType(PaymentType type) {
+        this.type = type;
     }
 }

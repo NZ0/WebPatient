@@ -1,5 +1,7 @@
 package controllers.dto;
 
+import models.PaymentType;
+
 import java.util.Date;
 
 /**
@@ -22,6 +24,7 @@ public class BillDto {
     private String phone;
     private Date date;
     private String zipCode;
+    private PaymentType type;
 
     public String getId() {
         return id;
@@ -141,5 +144,13 @@ public class BillDto {
 
     public String getZipCode() {
         return zipCode;
+    }
+
+    public PaymentType getType() {
+        return type;
+    }
+
+    public void setType(PaymentType type) {
+        this.type = type;
     }
 }

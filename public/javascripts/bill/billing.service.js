@@ -10,7 +10,10 @@
             var billingService = {
                 list : list,
                 search : search,
-                create : create
+                create : create,
+                get: get,
+                update: update,
+                delete: remove
             };
 
             return billingService;
@@ -29,8 +32,20 @@
                 return $http.get('billing/search/'+page, {params : {'id' : id}})
             }
 
+            function get(id) {
+                return $http.get('/billing/' + id + '?json=1');
+            }
+
             function create(bill) {
                 return $http.put('/billing', bill)
+            }
+
+            function update(bill) {
+                return $http.post('/billing/' + bill.id, bill);
+            }
+
+            function remove(hash) {
+                return $http.delete('/billing/' + hash);
             }
         }
 })();

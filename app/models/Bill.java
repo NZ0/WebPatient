@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Model;
+import models.patient.Consultation;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -32,7 +33,13 @@ public class Bill extends Model {
     private String zipCode;
 
     private Long patient;
-    private Long consultation;
+
+    @OneToOne(mappedBy = "bill", optional = true)
+    private Consultation consultation;
+
+    @Column(name = "payment_type")
+    @Enumerated(EnumType.STRING)
+    private PaymentType payment;
 
     public static final Find<Long, Bill> find = new Find<Long, Bill>(){};
 
@@ -90,14 +97,6 @@ public class Bill extends Model {
 
     public void setPatient(Long patient) {
         this.patient = patient;
-    }
-
-    public Long getConsultation() {
-        return consultation;
-    }
-
-    public void setConsultation(Long consultation) {
-        this.consultation = consultation;
     }
 
     public void setAddress(final String address) {
@@ -170,5 +169,21 @@ public class Bill extends Model {
 
     public void setHash(String hash) {
         this.hash = hash;
+    }
+
+    public PaymentType getPayment() {
+        return payment;
+    }
+
+    public void setPayment(PaymentType payment) {
+        this.payment = payment;
+    }
+
+    public Consultation getConsultation() {
+        return consultation;
+    }
+
+    public void setConsultation(Consultation consultation) {
+        this.consultation = consultation;
     }
 }

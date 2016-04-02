@@ -4,7 +4,7 @@
         <div class="col-md-6" role="main" data-ng-show="vm.patientLoading.loaded && !vm.patientLoading.error" ng-cloak>
             <h1 class="h2">{{vm.patient.firstName}} {{vm.patient.name}}</h1>
             <form class="form-horizontal" id="patientForm" name="vm.patientForm" ng-submit="vm.editPatient()">
-                <div ng-include src="'views/patientform.html'"></div>
+                <div ng-include src="'patient/views/form.html'"></div>
                 <div id="complementaryInfo">
                     <div class="form-group">
                         <label for="mutuel" class="col-sm-3 control-label">Mutuelle</label>
@@ -27,7 +27,7 @@
                     </div>
                     <div class="form-group">
                         <label for="children" class="col-sm-3 control-label">Nombre d'enfants</label>
-                        <div class="col-sm-2">
+                        <div class="col-sm-4">
                             <input type="number" class="form-control" id="children" name="children" min="0" ng-model="vm.patient.information.children"/>
                         </div>
                     </div>
@@ -59,6 +59,55 @@
                             </label>
                         </div>
                     </div>
+                    <h3>Antécedents</h3>
+                    <div class="form-group">
+                        <label for="ohn" class="col-sm-3 control-label">ORL</label>
+                        <div class="col-sm-9">
+                            <textarea id="ohn" name="ohn" class="form-control" rows="3" ng-model="vm.patient.information.ohn"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cardio" class="col-sm-3 control-label">Cardio-pulmonaire</label>
+                        <div class="col-sm-9">
+                            <textarea id="cardio" name="cardio" class="form-control" rows="3" ng-model="vm.patient.information.cardio"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="gastrointestinal" class="col-sm-3 control-label">Digestif</label>
+                        <div class="col-sm-9">
+                            <textarea id="gastrointestinal" name="gastrointestinal" class="form-control" rows="3" ng-model="vm.patient.information.gastrointestinal"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="gyneco" class="col-sm-3 control-label">Gyn&eacute;co/urinaire</label>
+                        <div class="col-sm-9">
+                            <textarea id="gyneco" name="gyneco" class="form-control" rows="3" ng-model="vm.patient.information.gyneco"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="avp" class="col-sm-3 control-label">Trauma / ortho / AVP</label>
+                        <div class="col-sm-9">
+                            <textarea id="avp" name="avp" class="form-control" rows="3" ng-model="vm.patient.information.avp"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="surgery" class="col-sm-3 control-label">Opérations</label>
+                        <div class="col-sm-9">
+                            <textarea id="surgery" name="surgery" class="form-control" rows="3" ng-model="vm.patient.information.surgery"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="treatment" class="col-sm-3 control-label">Traitement en cours</label>
+                        <div class="col-sm-9">
+                            <textarea id="treatment" name="treatment" class="form-control" rows="3" ng-model="vm.patient.information.treatment"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="other" class="col-sm-3 control-label">Autres</label>
+                        <div class="col-sm-9">
+                            <textarea id="other" name="other" class="form-control" rows="3" ng-model="vm.patient.information.other"></textarea>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <div class="col-sm-12">
                             <textarea class="form-control" rows="3" placeholder="Remarques" ng-model="vm.patient.information.misc"></textarea>
@@ -75,7 +124,7 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-6 col-sm-3" role="complementary" data-ng-show="vm.patientLoading.loaded && !vm.patientLoading.error" ng-cloak>
+        <div class="col-md-6" role="complementary" data-ng-show="vm.patientLoading.loaded && !vm.patientLoading.error" ng-cloak>
             <h1 class="h3">Consultations <a class="btn btn-success" href="#/consultation/add?patient={{vm.patient.id}}" role="button"><i class="fa fa-plus-circle"></i> Nouvelle consultation</a></h1>
             <div data-wploadingtable class="table-responsive" loading="!vm.consultLoading.loaded" total-items="vm.totalConsult" items-per-page="vm.nbConsultPage"
                  on-page-change="vm.pageChanged" current-page="vm.currentPage">
@@ -84,6 +133,7 @@
                         <tr>
                             <td>Titre</td>
                             <td>Date</td>
+                            <td>Facture</i></td>
                             <td>&nbsp;</td>
                         </tr>
                     </thead>
@@ -91,6 +141,13 @@
                         <tr ng-repeat="consultation in vm.consultations" ng-hide="!vm.consultations.length || vm.consultLoading.error">
                             <td><a href="#/consultation?id={{consultation.id}}">{{consultation.title}}</a></td>
                             <td>{{consultation.date | date : 'dd/MM/yyyy'}}</td>
+                            <td>
+                                <div class="btn-group" role="group" ng-show="consultation.bill !== null">
+                                    <button class="btn btn-info" ng-click="vm.showBill(consultation.bill)"><i class="fa fa-eye"></i></button>
+                                    <button class="btn btn-primary" ng-click="vm.showUpdateBill(consultation.bill, consultation.id)"><i class="fa fa-pencil-square-o"></i></button>
+                                    <button class="btn btn-danger" ng-click="vm.deleteBill(consultation.bill)"><i class="fa fa-trash"></i></button>
+                                </div>
+                            </td>
                             <td><i class="fa fa-exclamation-triangle" ng-if="consultation.important"></i></td>
                         </tr>
                         <tr ng-show="!vm.consultations.length || vm.consultLoading.error">

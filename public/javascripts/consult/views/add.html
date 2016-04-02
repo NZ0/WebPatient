@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="loading-container">
+        <div class="loading-mask" data-ng-show="vm.loading"></div>
+        <div class="col-md-12" role="main">
+            <h1>Patient {{vm.patient.firstName}} {{vm.patient.name}} {{vm.age}} ans</h1>
+            <form id="consulForm" name="consulForm" ng-submit="vm.saveConsult()">
+                <div ng-include src="'consult/views/consultationform.html'"></div>
+                <div class="form-group">
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary" ng-disabled="consulForm.$invalid">Sauver</button>
+                    </div>
+                    <div class="col-md-3" ng-hide="!vm.consultation.id">
+                        <div class="input-group">
+                            <div class="btn-group" role="group" ng-hide="vm.bill !== null">
+                                <button type="button" class="btn" disabled="disabled">Facturation: </button>
+                                <button type="button" class="btn btn-primary" title="G&eacute;n&eacute;rer la facture" ng-click="vm.openBillForm()"><i class="fa fa-plus-circle"></i></button>
+                            </div>
+                            <div class="btn-group" role="group" ng-hide="vm.bill === null">
+                                <button type="button" class="btn" disabled="disabled">Facturation: </button>
+                                <button class="btn btn-info" title="Voir la facture" ng-click="vm.showBill()"><i class="fa fa-eye"></i></button>
+                                <button class="btn btn-primary" title="Mettre à jour la facture" ng-click="vm.openBillForm()"><i class="fa fa-pencil-square-o"></i></button>
+                                <button class="btn btn-danger" title="Supprimer la facture" ng-click="vm.deleteBill()"><i class="fa fa-trash"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

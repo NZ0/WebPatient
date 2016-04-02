@@ -154,6 +154,10 @@ public class Consultation extends Model {
         return bill;
     }
 
+    public void setBill(Bill bill) {
+        this.bill = bill;
+    }
+
     public void update(ConsultationDto dto) {
         this.date = dto.getDate();
         this.title = dto.getTitle();

@@ -12,7 +12,7 @@ import java.util.Collection;
  */
 public class Backup {
 
-    private String version = "1.0";
+    private String version = "2.0";
     private Collection<Patient> patients;
     private Collection<Bill> bills;
     private Collection<Consultation> consultations;
